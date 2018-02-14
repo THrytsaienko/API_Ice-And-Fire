@@ -1,0 +1,11 @@
+body {
+    min-height: 100vh;
+    color: #fff;
+    position: relative;
+}
+
+.arrow-up {
+    position: fixed;
+    bottom: 5px;
+    right: 30px;
+}
