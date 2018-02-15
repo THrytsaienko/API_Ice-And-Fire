@@ -9031,12 +9031,17 @@ var _http = __webpack_require__(329);
 
 var _ui = __webpack_require__(330);
 
+// https://anapioficeandfire.com/
+
 document.querySelector('.books').addEventListener('click', getBooks);
 document.querySelector('.characters').addEventListener('click', getCharacters);
+document.querySelector('.houses').addEventListener('click', getHouses);
+document.querySelector('.navbar-brand').addEventListener('click', clearResults);
+// document.querySelector('.arrow-up').addEventListener('click', scrollToTop);
 
 function getBooks() {
-	_ui.ui.clearPrevResult();
-	_http.http.get('https://www.anapioficeandfire.com/api/books').then(function (data) {
+	_ui.ui.clearResults();
+	_http.http.get('https://www.anapioficeandfire.com/api/books?&pageSize=15').then(function (data) {
 		return _ui.ui.showBooks(data);
 	}).catch(function (err) {
 		return console.log(err);
@@ -9044,13 +9049,100 @@ function getBooks() {
 };
 
 function getCharacters() {
-	console.log('I am here!');
-	console.log(document.querySelector('#books'));
-	// ui.clearPrevResult();
-	// http.get('https://www.anapioficeandfire.com/api/books')
-	// 	.then(data => ui.showBooks(data))
-	// 	.catch(err => console.log(err));
+	_ui.ui.clearResults();
+	_http.http.get('https://www.anapioficeandfire.com/api/characters?page=7&pageSize=20')
+	// .then(data => console.log(data))
+	.then(function (data) {
+		return _ui.ui.showCharacters(data);
+	}).catch(function (err) {
+		return console.log(err);
+	});
 };
+
+function getHouses() {
+	_ui.ui.clearResults();
+	_http.http.get('https://www.anapioficeandfire.com/api/houses?page=3&pageSize=20')
+	// .then(data => console.log(data))
+	.then(function (data) {
+		return _ui.ui.showHouses(data);
+	}).catch(function (err) {
+		return console.log(err);
+	});
+};
+
+function clearResults(e) {
+	_ui.ui.clearResults();
+	e.prevebtDefault();
+}
+
+$("a[href='#top']").click(function () {
+	$("html, body").animate({
+		scrollTop: 0
+	}, 5000);
+	return false;
+});
+
+// function scrollToTop() {
+// 	window.setInterval(function () {
+// 		var pos = window.pageYOffset;
+// 		if (pos > 0) {
+// 			window.scrollTo(0, pos - 20); // how far to scroll on each step
+// 		} else {
+// 			window.clearInterval(scrollToTop);
+// 		}
+// 	}, 40); // how fast to scroll (this equals roughly 60 fps)
+// }
+
+
+$(function () {
+	TweenMax.staggerFromTo('.box', 1.5, {
+		x: '-=2000',
+		ease: Power2.easeOut
+	}, {
+		x: '40',
+		ease: Power2.easeOut
+	}, .1);
+});
+
+$(function () {
+	TweenMax.from('.all-btn', 1.5, {
+		y: '-=1000',
+		ease: Power2.easeOut
+	}, .1);
+});
+
+$('.books').click(function () {
+	var tl = new TimelineMax().from($('#books'), .5, {
+		x: '-=3000',
+		ease: Power2.easeOut
+	}).to($('#books'), .5, {
+		x: '+=250',
+		ease: Power2.easeOut
+	}).to($('#books'), .5, {
+		x: '0',
+		ease: Power2.easeOut
+	});
+});
+
+$('.characters').click(function () {
+	var tl = new TimelineMax().from($('#characters'), .5, {
+		x: '+=3000',
+		ease: Power2.easeOut
+	}).to($('#characters'), .5, {
+		x: '-=250',
+		ease: Power2.easeOut
+	}).to($('#characters'), .5, {
+		x: '0',
+		ease: Power2.easeOut
+	});
+});
+
+$('.houses').click(function () {
+	TweenMax.from('#houses', 1, {
+		y: '+=1000',
+		ease: Power2.easeOut
+	}, .1);
+});
 
 /***/ }),
 /* 329 */
@@ -9285,8 +9377,8 @@ var UI = function () {
 	}
 
 	_createClass(UI, [{
-		key: 'clearPrevResult',
-		value: function clearPrevResult() {
+		key: 'clearResults',
+		value: function clearResults() {
 			this.books.innerHTML = '';
 			this.characters.innerHTML = '';
 			this.houses.innerHTML = '';
@@ -9297,10 +9389,40 @@ var UI = function () {
 			var output = '';
 
 			dataBooks.forEach(function (book, index) {
-				output += '\n\t\t\t\t<div class="card">\n\t\t\t\t\t<div class="card-header">\n\t\t\t\t\t\tBook ' + (index + 1) + '\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="card-body">\n\t\t\t\t\t\t<h5 class="card-title">' + book.name + ', ' + book.authors[0] + '</h5>\n\t\t\t\t\t\t<ul class="list-group">\n\t\t\t\t\t\t\t<li class="list-group-item">Country: ' + book.country + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Type of cover: ' + book.mediaType + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Number of pages: ' + book.numberOfPages + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Publisher: ' + book.publisher + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Released: ' + book.released + '</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t';
+				output += '\n\t\t\t\t<div class="card bg-primary mb-5">\n\t\t\t\t\t<div class="card-header">\n\t\t\t\t\t\tBook ' + (index + 1) + '\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="card-body">\n\t\t\t\t\t\t<h5 class="card-title">' + book.name + ', ' + book.authors[0] + '</h5>\n\t\t\t\t\t\t<ul class="list-group">\n\t\t\t\t\t\t\t<li class="list-group-item">Country: ' + book.country + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Type of cover: ' + book.mediaType + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Number of pages: ' + book.numberOfPages + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Publisher: ' + book.publisher + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Released: ' + book.released + '</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t';
 			});
 
 			this.books.innerHTML = output;
+		}
+	}, {
+		key: 'showCharacters',
+		value: function showCharacters(dataCharacters) {
+			var output = '';
+
+			dataCharacters.forEach(function (character) {
+				var tvSeries = character.tvSeries;
+				var series = [];
+				tvSeries.forEach(function (season) {
+					return series.push(season);
+				});
+
+				var seasons = series.join(', ');
+
+				output += '\n\t\t\t\t<div class="card bg-info mb-5">\n\t\t\t\t\t<div class="card-header">\n\t\t\t\t\t\tName: ' + character.name + '\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="card-body">\n\t\t\t\t\t\t<ul class="list-group">\n\t\t\t\t\t\t\t<li class="list-group-item">Aliases: ' + character.aliases[0] + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Culture: ' + character.culture + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Gender: ' + character.gender + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Born: ' + character.born + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Title: ' + character.titles[0] + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Role in Season: ' + seasons + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Publisher: ' + character.publisher + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Released: ' + character.released + '</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t';
+			});
+
+			this.characters.innerHTML = output;
+		}
+	}, {
+		key: 'showHouses',
+		value: function showHouses(dataHouses) {
+			var output = '';
+
+			dataHouses.forEach(function (house) {
+				output += '\n\t\t\t\t<div class="card bg-danger mb-5">\n\t\t\t\t\t<div class="card-header">\n\t\t\t\t\t\tName: ' + house.name + '\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="card-body">\n\t\t\t\t\t\t<ul class="list-group">\n\t\t\t\t\t\t\t<li class="list-group-item">Coat of Arms: ' + house.coatOfArms + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Region: ' + house.region + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Seats: ' + house.seats[0] + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Titles: ' + house.titles[0] + '</li>\n\t\t\t\t\t\t\t<li class="list-group-item">Words: ' + house.words + '</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t';
+			});
+
+			this.houses.innerHTML = output;
 		}
 	}]);
 
