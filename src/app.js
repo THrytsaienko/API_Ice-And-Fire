@@ -43,7 +43,9 @@ function clearResults(e) {
 }
 
 $("a[href='#top']").click(function () {
-	$("html, body").animate({ scrollTop: 0 }, 5000);
+	$("html, body").animate({
+		scrollTop: 0
+	}, 5000);
 	return false;
 });
 
@@ -58,3 +60,61 @@ $("a[href='#top']").click(function () {
 // 		}
 // 	}, 40); // how fast to scroll (this equals roughly 60 fps)
 // }
+
+
+
+$(function () {
+	TweenMax.staggerFromTo('.box', 1.5, {
+		x: '-=2000',
+		ease: Power2.easeOut
+	}, {
+		x: '40',
+		ease: Power2.easeOut
+	}, .1);
+})
+
+$(function () {
+	TweenMax.from('.all-btn', 1.5, {
+		y: '-=1000',
+		ease: Power2.easeOut
+	}, .1);
+})
+
+$('.books').click(function () {
+	let tl = new TimelineMax()
+		.from($('#books'), .5, {
+			x: '-=3000',
+			ease: Power2.easeOut
+		})
+		.to($('#books'), .5, {
+			x: '+=250',
+			ease: Power2.easeOut
+		})
+		.to($('#books'), .5, {
+			x: '0',
+			ease: Power2.easeOut
+		})
+})
+
+$('.characters').click(function () {
+	let tl = new TimelineMax()
+		.from($('#characters'), .5, {
+			x: '+=3000',
+			ease: Power2.easeOut
+		})
+		.to($('#characters'), .5, {
+			x: '-=250',
+			ease: Power2.easeOut
+		})
+		.to($('#characters'), .5, {
+			x: '0',
+			ease: Power2.easeOut
+		})
+})
+
+$('.houses').click(function () {
+	TweenMax.from('#houses', 1, {
+		y: '+=1000',
+		ease: Power2.easeOut
+	}, .1);
+})
