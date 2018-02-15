@@ -9095,11 +9095,8 @@ $("a[href='#top']").click(function () {
 
 
 $(function () {
-	TweenMax.staggerFromTo('.box', 1.5, {
+	TweenMax.staggerFrom('.box', 1.5, {
 		x: '-=2000',
-		ease: Power2.easeOut
-	}, {
-		x: '0',
 		ease: Power2.easeOut
 	}, .1);
 });
