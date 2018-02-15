@@ -68,7 +68,7 @@ $(function () {
 		x: '-=2000',
 		ease: Power2.easeOut
 	}, {
-		x: '40',
+		x: '0',
 		ease: Power2.easeOut
 	}, .1);
 })
