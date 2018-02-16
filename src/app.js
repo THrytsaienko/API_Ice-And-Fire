@@ -78,36 +78,62 @@ $(function () {
 })
 
 $('.books').click(function () {
-	let tl = new TimelineMax()
-		.from($('#books'), .5, {
-			x: '-=3000',
-			ease: Power2.easeOut
-		})
-		.to($('#books'), .5, {
-			x: '+=250',
-			ease: Power2.easeOut
-		})
-		.to($('#books'), .5, {
-			x: '0',
-			ease: Power2.easeOut
-		})
+	TweenMax.from('#books', 1.5, {
+		x: '-=3000',
+		ease: Back.easeOut
+	}, .1);
 })
 
 $('.characters').click(function () {
-	let tl = new TimelineMax()
-		.from($('#characters'), .5, {
-			x: '+=3000',
-			ease: Power2.easeOut
-		})
-		.to($('#characters'), .5, {
-			x: '-=250',
-			ease: Power2.easeOut
-		})
-		.to($('#characters'), .5, {
-			x: '0',
-			ease: Power2.easeOut
-		})
+	TweenMax.from('#characters', 1.5, {
+		x: '+=3000',
+		ease: Back.easeOut
+	}, .1);
 })
+
+// $('.books').click(function () {
+// 	let tl = new TimelineMax()
+// 		.to($('#books'), .5, {
+// 			x: '-3000',
+// 			ease: Back.easeOut.config(1.7)
+// 		})
+// 		// .to($('#books'), .5, {
+// 		// 	x: '+=150',
+// 		// 	ease: Power2.easeOut
+// 		// })
+// 		// .to($('#books'), .5, {
+// 		// 	x: '0',
+// 		// 	ease: Power2.easeOut
+// 		// })
+// 		// .from($('#books'), .5, {
+// 		// 	x: '-=3000',
+// 		// 	ease: Power2.easeOut
+// 		// })
+// 		// .to($('#books'), .5, {
+// 		// 	x: '+=150',
+// 		// 	ease: Power2.easeOut
+// 		// })
+// 		// .to($('#books'), .5, {
+// 		// 	x: '0',
+// 		// 	ease: Power2.easeOut
+// 		// })
+// })
+
+// $('.characters').click(function () {
+// 	let tl = new TimelineMax()
+// 		.from($('#characters'), .5, {
+// 			x: '+=3000',
+// 			ease: Power2.easeOut
+// 		})
+// 		.to($('#characters'), .5, {
+// 			x: '-=150',
+// 			ease: Power2.easeOut
+// 		})
+// 		.to($('#characters'), .5, {
+// 			x: '0',
+// 			ease: Power2.easeOut
+// 		})
+// })
 
 $('.houses').click(function () {
 	TweenMax.from('#houses', 1, {

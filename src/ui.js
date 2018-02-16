@@ -5,6 +5,7 @@ class UI {
 		this.characters = document.querySelector('#characters');
 		this.houses = document.querySelector('#houses');
 	}
+	
 	clearResults() {
 		this.books.innerHTML = '';
 		this.characters.innerHTML = '';
