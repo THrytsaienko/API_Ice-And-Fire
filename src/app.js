@@ -49,20 +49,6 @@ $("a[href='#top']").click(function () {
 	return false;
 });
 
-
-// function scrollToTop() {
-// 	window.setInterval(function () {
-// 		var pos = window.pageYOffset;
-// 		if (pos > 0) {
-// 			window.scrollTo(0, pos - 20); // how far to scroll on each step
-// 		} else {
-// 			window.clearInterval(scrollToTop);
-// 		}
-// 	}, 40); // how fast to scroll (this equals roughly 60 fps)
-// }
-
-
-
 $(function () {
 	TweenMax.staggerFrom('.box', 1.5, {
 		x: '-=2000',
@@ -91,53 +77,24 @@ $('.characters').click(function () {
 	}, .1);
 })
 
-// $('.books').click(function () {
-// 	let tl = new TimelineMax()
-// 		.to($('#books'), .5, {
-// 			x: '-3000',
-// 			ease: Back.easeOut.config(1.7)
-// 		})
-// 		// .to($('#books'), .5, {
-// 		// 	x: '+=150',
-// 		// 	ease: Power2.easeOut
-// 		// })
-// 		// .to($('#books'), .5, {
-// 		// 	x: '0',
-// 		// 	ease: Power2.easeOut
-// 		// })
-// 		// .from($('#books'), .5, {
-// 		// 	x: '-=3000',
-// 		// 	ease: Power2.easeOut
-// 		// })
-// 		// .to($('#books'), .5, {
-// 		// 	x: '+=150',
-// 		// 	ease: Power2.easeOut
-// 		// })
-// 		// .to($('#books'), .5, {
-// 		// 	x: '0',
-// 		// 	ease: Power2.easeOut
-// 		// })
-// })
-
-// $('.characters').click(function () {
-// 	let tl = new TimelineMax()
-// 		.from($('#characters'), .5, {
-// 			x: '+=3000',
-// 			ease: Power2.easeOut
-// 		})
-// 		.to($('#characters'), .5, {
-// 			x: '-=150',
-// 			ease: Power2.easeOut
-// 		})
-// 		.to($('#characters'), .5, {
-// 			x: '0',
-// 			ease: Power2.easeOut
-// 		})
-// })
-
 $('.houses').click(function () {
 	TweenMax.from('#houses', 1, {
 		y: '+=1000',
 		ease: Power2.easeOut
 	}, .1);
 })
+
+// function scrollToTop() {
+// 	window.setInterval(function () {
+// 		var pos = window.pageYOffset;
+// 		if (pos > 0) {
+// 			window.scrollTo(0, pos - 20); // how far to scroll on each step
+// 		} else {
+// 			window.clearInterval(scrollToTop);
+// 		}
+// 	}, 40); // how fast to scroll (this equals roughly 60 fps)
+// }
+
+
+
+
